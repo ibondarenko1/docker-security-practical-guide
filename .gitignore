@@ -1,0 +1,35 @@
+# Docker
+*.log
+.env
+docker-compose.override.yml
+
+# Security keys
+*.key
+*.pub
+cosign.key
+cosign.pub
+
+# SBOM and scan results
+sbom.json
+*.sbom
+scan-results/
+trivy-cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+*.tmp
+*.bak
+
+# Lab artifacts
+labs/*/output/
+labs/*/logs/

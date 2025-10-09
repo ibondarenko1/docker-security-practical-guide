@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  secure-web:
+    image: nginx:alpine
+    read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    user: "101:101"
+    tmpfs:
+      - /var/run:rw,noexec,nosuid
+      - /var/cache/nginx:rw,noexec,nosuid
+      - /tmp:rw,noexec,nosuid
+    ports:
+      - "8081:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+        reservations:
+          cpus: '0.25'
+          memory: 64M

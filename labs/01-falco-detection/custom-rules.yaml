@@ -1,0 +1,24 @@
+- rule: Unauthorized Container File Access
+  desc: Detect access to sensitive host files from container
+  condition: >
+    open_read and container and
+    (fd.name startswith /etc/shadow or
+     fd.name startswith /etc/sudoers or
+     fd.name startswith /root/.ssh)
+  output: >
+    Sensitive file accessed in container
+    (user=%user.name command=%proc.cmdline file=%fd.name container=%container.name)
+  priority: WARNING
+  tags: [container, filesystem]
+
+- rule: Container Network Scanning
+  desc: Detect network scanning from containers
+  condition: >
+    outbound and container and
+    ((proc.name = nc and (proc.args contains "-z" or proc.args contains "scan")) or
+     (proc.name = nmap))
+  output: >
+    Network scanning detected
+    (user=%user.name command=%proc.cmdline connection=%fd.name container=%container.name)
+  priority: WARNING
+  tags: [container, network]
