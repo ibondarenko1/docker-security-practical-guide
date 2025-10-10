@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo "Cleaning up Falco lab..."
-docker stop falco 2>/dev/null
-docker rm falco 2>/dev/null
-echo "Cleanup complete!"
+echo "Cleaning up..."
+
+# Remove results file
+rm -f bench-results.txt
+
+# Remove any stopped bench containers
+docker rm $(docker ps -a -q -f label=docker_bench_security) 2>/dev/null || true
+
+echo "✓ Cleanup complete"

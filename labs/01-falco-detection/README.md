@@ -1,108 +1,116 @@
-# Lab 01: Falco Runtime Detection
+# Lab 01: Docker Security Benchmarking
 
-## ⚠️ Platform Requirements
+## Overview
 
-**✅ Linux Required** - This lab needs direct kernel access
+This lab uses Docker Bench Security to audit your Docker installation against CIS Docker Benchmark best practices. Unlike kernel-level tools, this works on **all platforms**.
 
-**❌ macOS Not Supported** - Docker Desktop's VM architecture prevents kernel monitoring
+## Platform Compatibility
 
-**Windows WSL2** - Should work (untested in this guide)
+✅ **Works everywhere:**
+- macOS (Docker Desktop)
+- Linux (all distributions)
+- Windows WSL2
+- Azure/AWS/GCP VMs
+- Bare metal
 
-## For macOS Users
+## What You'll Learn
 
-**Recommendation: Skip to Lab 02** which works identically on all platforms.
+- CIS Docker Benchmark standards
+- Docker daemon security configuration
+- Container runtime security
+- Host security configuration
+- Network and storage security
 
-If you want to complete this lab:
+## Lab Steps
 
-### Option 1: Use a Linux VM (Easiest)
+### 1. Run Security Audit
+
 ```bash
-# Install UTM (free) or Parallels/VirtualBox
-# Create Ubuntu VM
-# Install Docker in the VM
-# Clone this repo in the VM
-# Run Lab 01
+./run-audit.sh
 ```
 
-### Option 2: Use Colima
+This runs Docker Bench Security against your system.
+
+### 2. Review Results
+
 ```bash
-brew install colima
-colima start --cpu 4 --memory 8
-# Colima provides better Linux compatibility than Docker Desktop
+./view-results.sh
 ```
 
-### Option 3: Cloud Instance
+Shows categorized security findings:
+- [PASS] - Configuration meets security standards
+- [WARN] - Potential security issues
+- [INFO] - Informational findings
+- [NOTE] - Manual verification needed
+
+### 3. Fix Issues (Optional)
+
 ```bash
-# Spin up free tier AWS EC2 / GCP Compute / Azure VM
-# SSH in and run the lab
+./show-fixes.sh
 ```
 
-### Why This Limitation?
+Shows how to fix common issues found.
 
-Falco monitors system calls at the kernel level. Docker Desktop on macOS runs containers in a lightweight VM (LinuxKit) that doesn't expose kernel interfaces Falco needs. This is a fundamental architectural limitation, not a bug.
+## What Gets Checked
 
-**This is educational!** Real-world security tools have platform constraints. Understanding these limitations is part of security engineering.
+**Host Configuration:**
+- Separate partition for Docker
+- Docker daemon configuration
+- Audit logging
 
-## For Linux Users
+**Docker Daemon:**
+- TLS authentication
+- User namespaces
+- Content trust
+- Authorization plugins
 
-### Objectives
-- Deploy Falco for runtime security monitoring
-- Detect suspicious container behavior
-- Create custom detection rules
-- Analyze security events
+**Container Images:**
+- Trusted base images
+- No unnecessary packages
+- User configuration
 
-### Prerequisites
-- Linux kernel 4.14+
-- Docker installed
-- Root/sudo access
+**Container Runtime:**
+- AppArmor/SELinux profiles
+- Capability restrictions
+- Resource limits
+- Read-only filesystems
 
-### Steps
+**Docker Security Operations:**
+- Logging configuration
+- Secret management
+- Swarm mode (if applicable)
 
-#### 1. Deploy Falco
-```bash
-./deploy-falco.sh
+## Understanding Results
+
+### PASS Example
 ```
-
-#### 2. Run Attack Scenarios
-```bash
-./attack-scenarios.sh
+[PASS] 2.1 - Ensure network traffic is restricted between containers
 ```
+Your configuration is secure.
 
-#### 3. Analyze Alerts
-```bash
-docker logs -f falco
+### WARN Example
 ```
+[WARN] 2.8 - Enable user namespace support
+```
+Action needed to improve security.
 
-### Expected Outcomes
+### INFO Example
+```
+[INFO] 4.1 - Ensure a user for the container has been created
+```
+Verify manually in your containers.
 
-Falco should detect:
-- Sensitive file access (`/etc/shadow`, `/etc/sudoers`)
-- Network scanning activity
-- Privilege escalation attempts
-- Suspicious binary execution
+## Cleanup
 
-### Cleanup
 ```bash
 ./cleanup.sh
 ```
 
-## Learning Objectives
+## Key Takeaways
 
-Whether you run this lab or skip it, you've learned:
+- **CIS Benchmarks** provide security baselines
+- **Automated auditing** finds misconfigurations quickly
+- **Defense in depth** requires multiple security layers
+- **Regular audits** catch configuration drift
 
-1. **Kernel-level monitoring** requires direct kernel access
-2. **Platform constraints** affect security tool selection
-3. **Trade-offs exist** between convenience (Docker Desktop) and capabilities (full Linux)
-4. **Real-world security** involves working within platform limitations
-
-## Alternative: Watch It Work
-
-If you can't run this lab, search YouTube for "Falco container security demo" to see it in action.
-
-## Next Steps
-
-Continue to **Lab 02: Secure Configurations** which works on all platforms and teaches critical container hardening techniques.
-
-```bash
-cd ../02-secure-configs
-cat README.md
-```
+This tool is what security teams actually use in production!
