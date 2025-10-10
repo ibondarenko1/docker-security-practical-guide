@@ -1,142 +1,337 @@
-# Docker Security Practical Guide
+# Docker Security: A Practical Guide
 
-A comprehensive, hands-on guide to Docker and container security with practical labs, real-world examples, and production-ready configurations.
+A comprehensive, hands-on guide to Docker security best practices with real-world examples and lab exercises.
 
-## 🎯 Overview
+## 🎯 What You'll Learn
 
-This repository accompanies the DZone article "The Future of Docker Security" and provides executable examples for:
-- Runtime security monitoring
-- Container hardening
-- Vulnerability scanning pipelines
-- Image signing and verification
-- Custom security profiles
-- AI/ML workload security
+This guide takes you from basic Docker security concepts to advanced hardening techniques through practical, reproducible lab exercises. Each lab builds on previous knowledge while remaining self-contained.
 
-## Platform Compatibility
+### Core Topics Covered
 
-### Compatibility Matrix
+- **Security Auditing**: Using Docker Bench Security for CIS compliance
+- **Secure Images**: Building hardened, minimal container images
+- **Least Privilege**: Implementing proper access controls
+- **Secrets Management**: Protecting sensitive data
+- **Network Security**: Isolating and securing container communications
+- **Runtime Security**: Monitoring and protecting running containers
 
-| Lab | macOS Intel | macOS Apple Silicon | Linux | Windows WSL2 |
-|-----|-------------|---------------------|-------|--------------|
-| [Lab 01: Docker Security Benchmarking](labs/01-falco-detection/) | Limited | Limited | Full | Partial |
-| [Lab 02: Secure Configs](labs/02-secure-configs/) | Full | Full | Full | Full |
-| [Lab 03: Vulnerability Scanning](labs/03-vulnerability-scanning/) | Full | Full | Full | Full |
-| [Lab 04: Image Signing](labs/04-image-signing/) | Full | Full | Full | Full |
-| [Lab 05: Seccomp Profiles](labs/05-seccomp-profiles/) | Limited | Limited | Full | Partial |
-| [Lab 06: AI Model Security](labs/06-ai-model-security/) | Full | Full | Full | Full |
+## 📚 Lab Structure
 
-**Status Legend:**
-- **Full**: All features work as designed
-- **Limited**: Core concepts work, some features unavailable due to platform constraints  
-- **Partial**: Should work but untested
+### [Lab 01: Security Auditing with Docker Bench](./labs/01-docker-bench-security/)
 
-### Platform Notes
+**What You'll Learn:**
+- Run comprehensive security audits using Docker Bench Security
+- Understand CIS Docker Benchmark compliance checks
+- Identify common security misconfigurations
+- Fix vulnerable container configurations
 
-#### macOS (Docker Desktop)
+**Key Concepts:**
+- Privileged container detection
+- Network namespace isolation
+- Capability management
+- Security profile enforcement
 
-**Working Labs:** 2, 3, 4, 6 (full functionality)
+### [Lab 02: Building Secure Images](./labs/02-secure-images/)
 
-**Limited Labs:**
-**Lab 01**: Works on all platforms with Docker Bench Security
-- **Lab 05**: Syscall visibility limited through VM layer
+**What You'll Learn:**
+- Create minimal, secure container images
+- Implement multi-stage builds
+- Scan images for vulnerabilities
+- Sign and verify container images
 
-**For Full Experience on macOS:**
-- **Multipass**: `brew install multipass` - Launch Ubuntu VM
-- **Colima**: `brew install colima` - Better than Docker Desktop
-- **Cloud VM**: AWS/GCP/Azure free tier Ubuntu 22.04
-- **UTM**: Free ARM64 Ubuntu VM for Mac
+**Key Concepts:**
+- Distroless and minimal base images
+- Dependency scanning
+- Image signing with Content Trust
+- Vulnerability management
 
-#### Linux (Recommended)
+### [Lab 03: Least Privilege Containers](./labs/03-least-privilege/)
 
-**Best Distribution:** Ubuntu 22.04 LTS or 24.04 LTS
+**What You'll Learn:**
+- Run containers as non-root users
+- Drop unnecessary Linux capabilities
+- Implement read-only filesystems
+- Configure security contexts
 
-All labs work with complete functionality. Provides direct kernel access and production-representative environment.
+**Key Concepts:**
+- User namespace remapping
+- Capability dropping
+- Resource constraints
+- Security policies
 
-**Requirements:** Kernel 5.15+, Docker 24.0+, 4GB RAM (8GB recommended)
+### [Lab 04: Secrets Management](./labs/04-secrets-management/)
 
-#### Windows WSL2
+**What You'll Learn:**
+- Use Docker secrets properly
+- Integrate with external secret managers
+- Avoid common secrets exposure
+- Implement secure environment handling
 
-Most labs should work. Use Ubuntu 22.04 WSL distribution. Labs 1 and 5 may have limitations.
+**Key Concepts:**
+- Docker Swarm secrets
+- External secret management
+- Secrets rotation
+- Credential scanning
 
-### Architecture Notes
+### [Lab 05: Network Security](./labs/05-network-security/)
 
-**Apple Silicon (M1/M2/M3):** All tools support ARM64. Excellent performance. Kernel features limited by Docker Desktop VM.
+**What You'll Learn:**
+- Configure secure Docker networks
+- Implement network policies
+- Use service mesh patterns
+- Secure inter-container communication
 
-**Intel/AMD (x86_64):** Broadest compatibility and ecosystem support.
+**Key Concepts:**
+- Custom bridge networks
+- Network segmentation
+- Encrypted communication
+- Traffic control
 
+### [Lab 06: Runtime Security](./labs/06-runtime-security/)
 
-## 📚 Labs
+**What You'll Learn:**
+- Monitor container behavior
+- Detect security events
+- Implement runtime protection
+- Respond to security incidents
 
-### [Lab 01: Docker Security Benchmarking](labs/01-falco-detection/)
-CIS Docker Benchmark security auditing
+**Key Concepts:**
+- Runtime monitoring
+- Anomaly detection
+- Security event logging
+- Incident response
 
-### [Lab 02: Secure Configurations](labs/02-secure-configs/)
-Comparing insecure vs. hardened container configurations
+## 🚀 Getting Started
 
-### [Lab 03: Vulnerability Scanning](labs/03-vulnerability-scanning/)
-Complete image scanning and SBOM generation pipeline
+### Prerequisites
 
-### [Lab 04: Image Signing](labs/04-image-signing/)
-Implementing Docker Content Trust and Sigstore Cosign
+- Docker Engine 20.10+
+- Docker Compose 2.0+
+- Linux, macOS, or Windows with WSL2
+- Basic Docker knowledge
+- Terminal/command line familiarity
 
-### [Lab 05: Seccomp Profiles](labs/05-seccomp-profiles/)
-Creating and testing custom syscall restriction profiles
+### Quick Start
 
-### [Lab 06: AI Model Security](labs/06-ai-model-security/)
-Securing ML inference containers with resource limits
-
-## 🚀 Quick Start
-
+1. **Clone the repository:**
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/docker-security-practical-guide.git
+git clone https://github.com/opscart/docker-security-practical-guide.git
 cd docker-security-practical-guide
-
-# Run environment setup
-./tools/setup-environment.sh
-
-# Navigate to any lab and follow its README
-cd labs/01-falco-detection
-./run-lab.sh
 ```
 
-## 📋 Prerequisites
+2. **Start with Lab 01:**
+```bash
+cd labs/01-docker-bench-security
+./run-audit.sh
+```
 
-- Docker 24.0+ installed
-- Docker Compose v2+
-- 8GB RAM minimum
-- Linux or macOS (Windows WSL2 supported)
-- Basic understanding of containers
+3. **Follow along with the README in each lab directory**
 
-## 🛠️ Tools Setup
+## 📖 How to Use This Guide
 
-The repository includes scripts to install required security tools:
-- Trivy (vulnerability scanner)
-- Cosign (image signing)
-- Syft (SBOM generation)
-- Grype (vulnerability matching)
+### For Beginners
 
-## 📖 Documentation
+1. Start with Lab 01 to understand security auditing
+2. Progress sequentially through each lab
+3. Complete all exercises before moving forward
+4. Review the "Common Issues" sections
 
-- [Setup Guide](docs/setup-guide.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Additional Resources](docs/additional-resources.md)
+### For Experienced Users
+
+1. Jump to specific labs based on your needs
+2. Use as a reference for security patterns
+3. Adapt examples to your use cases
+4. Contribute improvements via pull requests
+
+### For Security Auditors
+
+1. Use Lab 01 for baseline security assessments
+2. Reference CIS Benchmark mappings
+3. Adapt checklists for your compliance needs
+4. Document findings using provided templates
+
+## 🔧 Lab Setup
+
+Each lab is self-contained and includes:
+
+- `README.md`: Comprehensive guide with theory and practice
+- `docker-compose.yml`: Ready-to-run configurations
+- Scripts: Automation for common tasks
+- Examples: Both vulnerable and secure configurations
+
+### Running a Lab
+
+```bash
+# Navigate to lab directory
+cd labs/XX-lab-name
+
+# Review the README
+cat README.md
+
+# Run the lab exercise
+./run-demo.sh  # or specific lab script
+
+# Clean up
+./cleanup.sh
+```
+
+## 🎓 Learning Path
+
+```
+Lab 01: Security Auditing
+    ↓
+Lab 02: Secure Images
+    ↓
+Lab 03: Least Privilege
+    ↓
+Lab 04: Secrets Management
+    ↓
+Lab 05: Network Security
+    ↓
+Lab 06: Runtime Security
+```
+
+**Estimated Time:** 
+- Each lab: 30-60 minutes
+- Complete guide: 4-6 hours
+- With practice exercises: 8-10 hours
+
+## 🛠️ Tools & Technologies
+
+### Security Tools Used
+
+- **Docker Bench Security**: CIS compliance auditing
+- **Trivy**: Vulnerability scanning
+- **Cosign**: Container signing
+- **Anchore**: Image analysis
+- **Notary**: Content trust
+
+### Technologies Covered
+
+- Docker Engine
+- Docker Compose
+- Linux Security Modules (AppArmor, SELinux)
+- Seccomp profiles
+- User namespaces
+- Capability systems
+
+## 📝 Best Practices Summary
+
+### Image Security
+- Use minimal base images (alpine, distroless)
+- Scan for vulnerabilities regularly
+- Sign and verify images
+- Use specific tags, never `latest`
+- Implement multi-stage builds
+
+### Runtime Security
+- Run as non-root user
+- Drop unnecessary capabilities
+- Use read-only filesystems
+- Enable security profiles
+- Set resource limits
+
+### Network Security
+- Use custom bridge networks
+- Avoid host network mode
+- Implement network segmentation
+- Encrypt traffic with TLS
+- Control ingress/egress
+
+### Secrets Management
+- Never hardcode credentials
+- Use Docker secrets or external vaults
+- Rotate secrets regularly
+- Limit secret access scope
+- Audit secret usage
+
+### Operational Security
+- Regular security audits
+- Keep Docker updated
+- Monitor container behavior
+- Log security events
+- Incident response plan
 
 ## 🤝 Contributing
 
-Contributions welcome! Please read our contributing guidelines and submit PRs.
+Contributions are welcome! Please:
 
-## 📄 License
+1. Fork the repository
+2. Create a feature branch
+3. Add your improvements
+4. Test thoroughly
+5. Submit a pull request
 
-MIT License - see LICENSE file for details
+### Contribution Ideas
 
-## ⚠️ Security Notice
+- Additional lab exercises
+- Security tool integrations
+- Cloud platform examples
+- Kubernetes security labs
+- Advanced threat scenarios
 
-These labs include intentionally vulnerable configurations for educational purposes. 
-**Never use insecure examples in production environments.**
+## 📚 Additional Resources
 
-## 🔗 Related Resources
-
-- [Docker Security Docs](https://docs.docker.com/engine/security/)
+### Official Documentation
+- [Docker Security](https://docs.docker.com/engine/security/)
 - [CIS Docker Benchmark](https://www.cisecurity.org/benchmark/docker)
-- [NIST Container Security Guide](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-190.pdf)
+- [Docker Bench Security](https://github.com/docker/docker-bench-security)
+
+### Security Standards
+- [NIST Container Security](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-190.pdf)
+- [OWASP Docker Top 10](https://owasp.org/www-project-docker-top-10/)
+- [CIS Controls](https://www.cisecurity.org/controls)
+
+### Community Resources
+- [Docker Security Subreddit](https://reddit.com/r/docker)
+- [Docker Community Slack](https://dockercommunity.slack.com)
+- [Stack Overflow Docker Tag](https://stackoverflow.com/questions/tagged/docker)
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Issue: Permission denied running scripts**
+```bash
+chmod +x script-name.sh
+```
+
+**Issue: Docker daemon not running**
+```bash
+sudo systemctl start docker
+```
+
+**Issue: Port already in use**
+```bash
+docker ps  # Check running containers
+docker-compose down  # Stop services
+```
+
+**Issue: Image pull failures**
+```bash
+docker login  # Authenticate if needed
+docker pull image-name  # Manual pull to test
+```
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) file for details
+
+## ✨ Acknowledgments
+
+- Docker team for security tools and documentation
+- CIS for the Docker Benchmark
+- OWASP for security guidelines
+- Open source security community
+
+## 📧 Contact
+
+- **Author**: [Your Name]
+- **GitHub**: [@opscart](https://github.com/opscart)
+- **Issues**: [Report issues](https://github.com/opscart/docker-security-practical-guide/issues)
+
+---
+
+**⭐ If you find this guide helpful, please star the repository!**
+
+**🔒 Remember: Security is a journey, not a destination. Keep learning, keep improving!**
