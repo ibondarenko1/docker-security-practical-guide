@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cosign-policy
+data:
+  policy.yaml: |
+    apiVersion: policy.sigstore.dev/v1beta1
+    kind: ClusterImagePolicy
+    metadata:
+      name: signed-images-policy
+    spec:
+      images:
+      - glob: "**"
+      authorities:
+      - key:
+          data: |
+            $(cat cosign.pub)

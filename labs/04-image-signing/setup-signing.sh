@@ -2,17 +2,47 @@
 
 echo "Setting up image signing with Cosign..."
 
-# Generate key pair
-if [ ! -f cosign.key ]; then
-  echo "Generating cosign key pair..."
-  cosign generate-key-pair
-  echo "Keys generated: cosign.key (private) and cosign.pub (public)"
-else
-  echo "Keys already exist"
+# Check if cosign is installed and working
+if ! command -v cosign &>/dev/null; then
+    echo "✗ Cosign not found"
+    echo "Install: brew install cosign"
+    exit 1
 fi
 
-# Start local registry
-docker run -d -p 5000:5000 --name registry registry:2
+if ! cosign version &>/dev/null; then
+    echo "✗ Cosign binary incompatible"
+    exit 1
+fi
 
-echo "Local registry started on localhost:5000"
-echo "Setup complete!"
+echo "✓ Cosign: $(cosign version 2>&1 | head -1)"
+
+# Generate key pair
+if [ ! -f cosign.key ]; then
+  echo ""
+  echo "Generating key pair (enter a password)..."
+  cosign generate-key-pair
+  echo "✓ Keys generated"
+else
+  echo "✓ Keys exist"
+fi
+
+# Clean up
+docker stop registry 2>/dev/null
+docker rm registry 2>/dev/null
+
+# Use port 5001 to avoid conflicts
+echo ""
+echo "Starting registry on port 5001..."
+docker run -d -p 5001:5000 --restart=always --name registry registry:2
+
+sleep 3
+
+if docker ps | grep -q registry; then
+    echo "✓ Registry on localhost:5001"
+    echo ""
+    echo "✅ Setup complete!"
+else
+    echo "✗ Failed"
+    docker logs registry
+    exit 1
+fi

@@ -1,9 +1,18 @@
 #!/bin/bash
 
-echo "Verifying image signature..."
+echo "Verifying signature..."
 
-cosign verify --key cosign.pub localhost:5000/signed-app:v1.0
+if [ ! -f cosign.pub ]; then
+    echo "✗ Public key not found"
+    exit 1
+fi
 
-echo ""
-echo "Verification complete!"
-echo "If you see 'Verification for localhost:5000/signed-app:v1.0 -- VALID', the signature is correct"
+cosign verify --key cosign.pub localhost:5001/signed-app:v1.0
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ Signature VALID"
+else
+    echo "✗ Signature INVALID"
+    exit 1
+fi

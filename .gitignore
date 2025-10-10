@@ -33,3 +33,11 @@ tmp/
 # Lab artifacts
 labs/*/output/
 labs/*/logs/
+
+# Lab artifacts (generated during testing)
+labs/03-vulnerability-scanning/Dockerfile.vulnerable
+labs/03-vulnerability-scanning/package.json
+labs/03-vulnerability-scanning/server.js
+labs/03-vulnerability-scanning/scan-results.json
+labs/04-image-signing/Dockerfile
+labs/04-image-signing/admission-policy.yaml

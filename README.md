@@ -12,6 +12,59 @@ This repository accompanies the DZone article "The Future of Docker Security" an
 - Custom security profiles
 - AI/ML workload security
 
+## Platform Compatibility
+
+### Compatibility Matrix
+
+| Lab | macOS Intel | macOS Apple Silicon | Linux | Windows WSL2 |
+|-----|-------------|---------------------|-------|--------------|
+| [Lab 01: Falco Detection](labs/01-falco-detection/) | Limited | Limited | Full | Partial |
+| [Lab 02: Secure Configs](labs/02-secure-configs/) | Full | Full | Full | Full |
+| [Lab 03: Vulnerability Scanning](labs/03-vulnerability-scanning/) | Full | Full | Full | Full |
+| [Lab 04: Image Signing](labs/04-image-signing/) | Full | Full | Full | Full |
+| [Lab 05: Seccomp Profiles](labs/05-seccomp-profiles/) | Limited | Limited | Full | Partial |
+| [Lab 06: AI Model Security](labs/06-ai-model-security/) | Full | Full | Full | Full |
+
+**Status Legend:**
+- **Full**: All features work as designed
+- **Limited**: Core concepts work, some features unavailable due to platform constraints  
+- **Partial**: Should work but untested
+
+### Platform Notes
+
+#### macOS (Docker Desktop)
+
+**Working Labs:** 2, 3, 4, 6 (full functionality)
+
+**Limited Labs:**
+- **Lab 01**: Docker Desktop VM prevents kernel-level monitoring
+- **Lab 05**: Syscall visibility limited through VM layer
+
+**For Full Experience on macOS:**
+- **Multipass**: `brew install multipass` - Launch Ubuntu VM
+- **Colima**: `brew install colima` - Better than Docker Desktop
+- **Cloud VM**: AWS/GCP/Azure free tier Ubuntu 22.04
+- **UTM**: Free ARM64 Ubuntu VM for Mac
+
+#### Linux (Recommended)
+
+**Best Distribution:** Ubuntu 22.04 LTS or 24.04 LTS
+
+All labs work with complete functionality. Provides direct kernel access and production-representative environment.
+
+**Requirements:** Kernel 5.15+, Docker 24.0+, 4GB RAM (8GB recommended)
+
+#### Windows WSL2
+
+Most labs should work. Use Ubuntu 22.04 WSL distribution. Labs 1 and 5 may have limitations.
+
+### Architecture Notes
+
+**Apple Silicon (M1/M2/M3):** All tools support ARM64. Excellent performance. Kernel features limited by Docker Desktop VM.
+
+**Intel/AMD (x86_64):** Broadest compatibility and ecosystem support.
+
+
 ## 📚 Labs
 
 ### [Lab 01: Falco Detection](labs/01-falco-detection/)
