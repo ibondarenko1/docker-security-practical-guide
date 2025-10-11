@@ -1,0 +1,27 @@
+services:
+  vulnerable-web:
+    image: nginx:latest
+    container_name: vulnerable-web
+    privileged: true
+    network_mode: host
+    pid: host
+    volumes:
+      - /:/hostroot:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - ADMIN_PASSWORD=admin123
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor:unconfined
+      - seccomp:unconfined
+
+  insecure-db:
+    image: mysql:8.0
+    container_name: insecure-db
+    platform: linux/arm64
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=proddb
+    ports:
+      - "3306:3306"
