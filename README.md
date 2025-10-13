@@ -61,20 +61,22 @@ This guide takes you from basic Docker security concepts to advanced hardening t
 - Resource constraints
 - Security policies
 
-### [Lab 04: Secrets Management](./labs/04-secrets-management/)
+### [Lab 04: Image Signing and Verification](./labs/04-image-signing/)
 
 **What You'll Learn:**
-- Use Docker secrets properly
-- Integrate with external secret managers
-- Avoid common secrets exposure
-- Implement secure environment handling
+- Sign container images with Cosign
+- Verify image signatures before deployment
+- Implement Docker Content Trust
+- Enforce signing policies
+- Manage signing keys securely
 
 **Key Concepts:**
-- Docker Swarm secrets
-- External secret management
-- Secrets rotation
-- Credential scanning
-
+- Digital signatures and cryptographic verification
+- Cosign and Sigstore project
+- Docker Content Trust (DCT)
+- Keyless signing with OIDC
+- Supply chain attack prevention
+- Policy enforcement for signed images
 ### [Lab 05: Network Security](./labs/05-network-security/)
 
 **What You'll Learn:**
