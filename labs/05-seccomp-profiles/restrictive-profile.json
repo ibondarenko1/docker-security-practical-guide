@@ -1,19 +1,32 @@
 {
   "defaultAction": "SCMP_ACT_ERRNO",
-  "architectures": ["SCMP_ARCH_X86_64"],
+  "architectures": [
+    "SCMP_ARCH_X86_64",
+    "SCMP_ARCH_X86",
+    "SCMP_ARCH_X32",
+    "SCMP_ARCH_AARCH64",
+    "SCMP_ARCH_ARM"
+  ],
   "syscalls": [
     {
       "names": [
-        "read", "write", "open", "close", "stat", "fstat", "lstat",
-        "poll", "lseek", "mmap", "mprotect", "munmap", "brk",
-        "rt_sigaction", "rt_sigprocmask", "ioctl", "access",
-        "socket", "connect", "accept", "sendto", "recvfrom",
-        "bind", "listen", "setsockopt", "getsockopt",
-        "clone", "fork", "execve", "exit", "wait4",
-        "getcwd", "chdir", "mkdir", "rmdir", "unlink",
-        "getuid", "getgid", "geteuid", "getegid",
-        "getpid", "getppid", "getpgrp", "setsid",
-        "rt_sigreturn", "futex", "arch_prctl", "exit_group"
+        "accept", "accept4", "access", "arch_prctl", "brk",
+        "capget", "capset", "chdir", "chmod", "chown",
+        "clone", "close", "dup", "dup2", "dup3",
+        "epoll_create", "epoll_create1", "epoll_ctl", "epoll_pwait",
+        "epoll_wait", "execve", "exit", "exit_group", "faccessat",
+        "faccessat2", "fchdir", "fchmod", "fchmodat", "fchown",
+        "fchownat", "fcntl", "fstat", "fstatfs", "futex",
+        "getcwd", "getdents", "getdents64", "getegid", "geteuid",
+        "getgid", "getpid", "getppid", "getuid", "ioctl",
+        "lseek", "lstat", "mmap", "mprotect", "munmap",
+        "nanosleep", "newfstatat", "open", "openat", "pipe",
+        "pipe2", "poll", "prctl", "pread64", "prlimit64",
+        "read", "readlink", "readlinkat", "rt_sigaction",
+        "rt_sigprocmask", "rt_sigreturn", "sched_getaffinity",
+        "sched_yield", "set_robust_list", "set_tid_address",
+        "setgid", "setgroups", "setuid", "sigaltstack", "stat",
+        "statfs", "tgkill", "umask", "uname", "wait4", "write"
       ],
       "action": "SCMP_ACT_ALLOW"
     }

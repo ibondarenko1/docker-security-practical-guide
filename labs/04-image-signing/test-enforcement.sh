@@ -4,14 +4,14 @@ echo "Testing signature enforcement..."
 
 echo ""
 echo "1. Pulling signed image (should succeed):"
-cosign verify --key cosign.pub localhost:5000/signed-app:v1.0 && \
-  docker pull localhost:5000/signed-app:v1.0
+cosign verify --key cosign.pub localhost:5001/signed-app:v1.0 && \
+  docker pull localhost:5001/signed-app:v1.0
 
 echo ""
 echo "2. Attempting to pull unsigned image (should fail with verification):"
-docker build -t localhost:5000/unsigned-app:v1.0 -f Dockerfile .
-docker push localhost:5000/unsigned-app:v1.0
-cosign verify --key cosign.pub localhost:5000/unsigned-app:v1.0 || \
+docker build -t localhost:5001/unsigned-app:v1.0 -f Dockerfile .
+docker push localhost:5001/unsigned-app:v1.0
+cosign verify --key cosign.pub localhost:5001/unsigned-app:v1.0 || \
   echo "Verification failed (expected - image not signed)"
 
 echo ""
