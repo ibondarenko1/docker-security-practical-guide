@@ -31,19 +31,21 @@ This guide takes you from basic Docker security concepts to advanced hardening t
 - Capability management
 - Security profile enforcement
 
-### [Lab 02: Building Secure Images](./labs/02-secure-images/)
+### [Lab 02: Secure Container Configurations](./labs/02-secure-configs/)
 
 **What You'll Learn:**
-- Create minimal, secure container images
-- Implement multi-stage builds
-- Scan images for vulnerabilities
-- Sign and verify container images
+- Compare insecure vs secure container configurations
+- Understand and apply Linux capabilities
+- Implement read-only filesystems
+- Use tmpfs for required write operations
+- Apply security options like no-new-privileges
 
 **Key Concepts:**
-- Distroless and minimal base images
-- Dependency scanning
-- Image signing with Content Trust
-- Vulnerability management
+- Linux capability system
+- Read-only root filesystems
+- Capability dropping (drop all, add specific)
+- tmpfs mounts with noexec and nosuid
+- Container hardening without breaking functionality
 
 ### [Lab 03: Least Privilege Containers](./labs/03-least-privilege/)
 
