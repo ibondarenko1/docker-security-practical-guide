@@ -91,19 +91,23 @@ This guide takes you from basic Docker security concepts to advanced hardening t
 - Encrypted communication
 - Traffic control
 
-### [Lab 06: Runtime Security](./labs/06-runtime-security/)
+### [Lab 06: AI Model Security](./labs/06-ai-model-security/)
 
 **What You'll Learn:**
-- Monitor container behavior
-- Detect security events
-- Implement runtime protection
-- Respond to security incidents
+- Secure containerized machine learning workloads
+- Set appropriate resource limits for ML containers
+- Implement input validation and rate limiting
+- Protect model intellectual property
+- Monitor ML container behavior
+- Deploy ML models securely in production
 
 **Key Concepts:**
-- Runtime monitoring
-- Anomaly detection
-- Security event logging
-- Incident response
+- Resource management for ML workloads
+- Model extraction and adversarial attacks
+- API authentication and authorization
+- Input validation for ML endpoints
+- Model encryption and access control
+- Monitoring and anomaly detection for ML services
 
 ## 🚀 Getting Started
 
