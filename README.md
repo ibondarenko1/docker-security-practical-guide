@@ -1,4 +1,4 @@
-.# Docker Security: A Practical Guide
+..# Docker Security: A Practical Guide
 
 A comprehensive, hands-on guide to Docker security best practices with real-world examples and lab exercises.
 
